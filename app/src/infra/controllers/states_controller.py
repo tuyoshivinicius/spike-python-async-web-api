@@ -12,8 +12,7 @@ async def get_states():
     states_gateway = StatesGateway()
     cities_gateway = CitiesGateway()
     districts_gateway = DistrictsGateway()
-
-    # Configuração de concorrência: máximo 5 estados e 10 cidades simultaneamente
+    
     usecase = ListOfStatesAndCities(
         states_gateway, 
         cities_gateway, 
