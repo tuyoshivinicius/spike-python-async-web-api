@@ -4,6 +4,7 @@ from typing import List, Dict, Any, Optional
 import logging
 
 from src.domain.dtos import StateDTO
+from src.application.ports import StatesGatewayPortInterface
 
 logger = logging.getLogger("default")
 
@@ -13,7 +14,7 @@ class StatesGatewayError(Exception):
     pass
 
 
-class StatesGateway:
+class StatesGateway(StatesGatewayPortInterface):
     """Gateway para consumir dados de estados do IBGE"""
     
     def __init__(self, base_url: str = "https://servicodados.ibge.gov.br/api/v1/localidades"):

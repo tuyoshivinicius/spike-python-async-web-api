@@ -4,6 +4,7 @@ from typing import List
 import logging
 
 from src.domain.dtos import DistrictDTO
+from src.application.ports import DistrictsGatewayPortInterface
 
 logger = logging.getLogger("default")
 
@@ -13,7 +14,7 @@ class DistrictsGatewayError(Exception):
     pass
 
 
-class DistrictsGateway:
+class DistrictsGateway(DistrictsGatewayPortInterface):
     """Gateway para consumir dados de distritos do IBGE"""
     
     def __init__(self, base_url: str = "https://servicodados.ibge.gov.br/api/v1/localidades"):

@@ -1,22 +1,20 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
-from src.infra.gateways.states_gateway import StatesGateway
-from src.infra.gateways.cities_gateway import CitiesGateway
-from src.infra.gateways.districts_gateway import DistrictsGateway
 from src.application.usecases.list_of_states_and_cities_usecase import ListOfStatesAndCities
+from src.infra.di.dependencies import get_list_of_states_and_cities_usecase
 
 router = APIRouter()
 
 @router.get("/states")
-async def get_states():
-    states_gateway = StatesGateway()
-    cities_gateway = CitiesGateway()
-    districts_gateway = DistrictsGateway()
+async def get_states(
+    usecase: ListOfStatesAndCities = Depends(get_list_of_states_and_cities_usecase)
+):
+    """
+    Endpoint para buscar todos os estados com suas respectivas cidades e distritos.
     
-    usecase = ListOfStatesAndCities(
-        states_gateway, 
-        cities_gateway, 
-        districts_gateway        
-    )
-
+    As dependências são injetadas automaticamente pelo container DI.
+    
+    Returns:
+        Lista com todos os estados, cidades e distritos
+    """
     return await usecase.execute()

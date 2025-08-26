@@ -2,13 +2,24 @@ import asyncio
 import logging
 from typing import List, Any
 
+from src.application.ports import (
+    StatesGatewayPortInterface,
+    CitiesGatewayPortInterface,
+    DistrictsGatewayPortInterface
+)
+
 logger = logging.getLogger('default')
 
 
 class ListOfStatesAndCities:
     """Classe para buscar estados, cidades e distritos de forma assíncrona."""
     
-    def __init__(self, states_gateway, cities_gateway, districts_gateway):
+    def __init__(
+        self, 
+        states_gateway: StatesGatewayPortInterface,
+        cities_gateway: CitiesGatewayPortInterface, 
+        districts_gateway: DistrictsGatewayPortInterface
+    ):
         self.states_gateway = states_gateway
         self.cities_gateway = cities_gateway
         self.districts_gateway = districts_gateway
